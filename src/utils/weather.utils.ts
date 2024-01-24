@@ -1,3 +1,5 @@
+import { Utils } from "./util.utils";
+
 export function kelvinToCelsius(kelvin: number): number {
     const CONSTANTS: number = 273.15;
     return kelvin - CONSTANTS;
@@ -12,17 +14,18 @@ export class WeatherUtils {
     }
 
     private static generateRandomValue(min: number, max: number): number {
-        return Math.random() * (max - min) + min;
+        return Utils.generateRandomValue(min, max);
     }
     static generateRandomTemp(minTemp: number, maxTemp): number {
         const temp: number = this.generateRandomValue(minTemp, maxTemp);
-        return kelvinToCelsius(temp);
+        return Math.round(kelvinToCelsius(temp));
     }
     static generateRandomHumidity(): number {
-        return this.generateRandomValue(this.minHumidity, this.maxHumidity);
+        return Math.round(this.generateRandomValue(this.minHumidity, this.maxHumidity));
     }
     static generateRandomWindSpeed(minSpeed: number): number {
-        return this.generateRandomValue(0, this.maxWindSpeed);
+        return Number(this.generateRandomValue(minSpeed, this.maxWindSpeed).toFixed(2));
     }
+
 
 }
